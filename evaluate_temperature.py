@@ -21,12 +21,22 @@ df = pd.read_csv("./data/GlobalLandTemperaturesByMajorCity.csv.bz2") # read csv 
 # plt.hist(df["AverageTemperature"]) # create histrogram
 # plt.show() # show histogram
 
-print(df.loc[0]) # get first row of df
-print(df.loc[0]["AverageTemperature"]) # get value in first row
-print(dict(df.loc[0])) # convert first row to dictionary
-print(df["City"].loc[0]) # first value from city
-df_germany = df[df["Country"] == "Germany"] # get only germany
-print(df_germany.head()) # check index
-print(df_germany.iloc[0]) # start at index 0 with iloc
-df_germany_france = df[(df["Country"] == "Germany") | (df["Country"] == "France")] # get germany or France
-df_germany_france = df[(df["Country"] == "Germany") & (df["Country"] == "France")] # get germany and France
+# print(df.loc[0]) # get first row of df
+# print(df.loc[0]["AverageTemperature"]) # get value in first row
+# print(dict(df.loc[0])) # convert first row to dictionary
+# print(df["City"].loc[0]) # first value from city
+# df_germany = df[df["Country"] == "Germany"] # get only germany
+# print(df_germany.head()) # check index
+# print(df_germany.iloc[0]) # start at index 0 with iloc
+# df_germany_france = df[(df["Country"] == "Germany") | (df["Country"] == "France")] # get germany or France
+# df_germany_france = df[(df["Country"] == "Germany") & (df["Country"] == "France")] # get germany and France
+
+# df["Country"] = "World" # change every Country to world
+df["Planet"] = "World" # create new Column Planet with value World
+df["AverageTemperature"] = df["AverageTemperature"] + 5 # add 5 to every AverageTemperature and override column, can also use a numpy array
+
+# df[df["Country"] == "Germany"]["Country"] = "Deutschland" # wont work , cause working on copy
+df.loc[df["Country"] == "Germany", "Country"] = "Deutschland" # change Germany to Deutschland
+print(df[df["Country"] == "Deutschland"])
+
+df.loc[df["AverageTemperature"] >= 25, "AverageTemperature"] = 25 # change each temperature above 25 to 25
