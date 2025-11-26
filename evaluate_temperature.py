@@ -1,4 +1,5 @@
 import pandas as pd # import pandas as pd
+import matplotlib.pyplot as plt
 
 df = pd.read_csv("./data/GlobalLandTemperaturesByMajorCity.csv.bz2") # read csv file and safe as dataframe
 
@@ -14,3 +15,8 @@ df.drop(["AverageTemperatureUncertainty"], axis = 1, inplace = True) # drop colu
 print(df["AverageTemperature"].mean()) # get mean value of column AverageTemperature
 print(df["AverageTemperature"].min()) # get min value of column AverageTemperature
 print(df["AverageTemperature"].max()) # get max value of column AverageTemperature
+print(df["AverageTemperature"].sum()) # get sum value of column AverageTemperature
+print(df["AverageTemperature"].to_numpy()) # get numpy value of column AverageTemperature
+
+plt.hist(df["AverageTemperature"]) # create histrogram
+plt.show() # show histogram
