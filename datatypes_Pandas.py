@@ -55,4 +55,7 @@ print(res.loc[1980:2014, "avgTmp"])
 res.iloc[-1]
 res.iloc[-1].name
 res.sort_values("minTmp")
+
+df_cold = df[df["AverageTemperature"]<25].copy()
+df_cold["new_column"] = 60
 # print(res.head)
