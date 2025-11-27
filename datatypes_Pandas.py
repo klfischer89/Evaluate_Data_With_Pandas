@@ -1,5 +1,6 @@
 import pandas as pd # import pandas as pd
 import math
+import numpy as np
 
 df = pd.read_csv("./data/GlobalLandTemperaturesByMajorCity.csv.bz2") # read csv file and safe as dataframe
 
@@ -33,12 +34,20 @@ latDir = df["Latitude"].str[-1]
 df["Latitude"] = df["Latitude"].str[:-1].astype("float")
 df.loc[latDir == "S", "Latitude"] = df["Latitude"] * -1
 
-print(df.head)
+# print(df.head)
 
 df["dt"] = pd.to_datetime(df["dt"])
-
-# print(df.head)
-print(df.loc[df["dt"].dt.year == 1849, "AverageTemperature"].mean())
-print(df.loc[df["dt"].dt.year == 2012, "AverageTemperature"].mean())
+df["dtYear"] = df["dt"].dt.year
+# # print(df.head)
+# print(df.loc[df["dt"].dt.year == 1849, "AverageTemperature"].mean())
+# print(df.loc[df["dt"].dt.year == 2012, "AverageTemperature"].mean())
 
 df.sort_values(by=["AverageTemperature"], inplace=True, ascending=False)
+
+res = df.groupby(by=["dtYear"]).agg(
+    avgTmp=("AverageTemperature", np.mean),
+    avgMin=("AverageTemperature", np.min))
+print(res.iloc[0])
+print(res.loc[2000])
+print(res.loc[1980:2014, "avgTmp"])
+# print(res.head)
