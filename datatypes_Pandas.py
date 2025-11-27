@@ -46,8 +46,13 @@ df.sort_values(by=["AverageTemperature"], inplace=True, ascending=False)
 
 res = df.groupby(by=["dtYear"]).agg(
     avgTmp=("AverageTemperature", np.mean),
-    avgMin=("AverageTemperature", np.min))
+    minTmp=("AverageTemperature", np.min))
+
 print(res.iloc[0])
 print(res.loc[2000])
 print(res.loc[1980:2014, "avgTmp"])
+
+res.iloc[-1]
+res.iloc[-1].name
+res.sort_values("minTmp")
 # print(res.head)
